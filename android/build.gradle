@@ -1,19 +1,8 @@
-
-buildscript {
-    repositories {
-        jcenter()
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.4'
-    }
-}
-
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
 
     defaultConfig {
         minSdkVersion 16
@@ -28,10 +17,18 @@ android {
 
 repositories {
     mavenCentral()
+    maven { url 'https://s3.amazonaws.com/moat-sdk-builds' }
+    maven { url "http://172.25.200.50:8081/repository/maven-public/" }
 }
 
 dependencies {
-    compile 'com.facebook.react:react-native:+'
-    compile 'com.google.android.gms:play-services-ads:+'
+    implementation 'com.facebook.react:react-native:+'
+    implementation 'com.google.android.gms:play-services-ads:+'
+    implementation('sh.whisper:android-datametrical:1.1.0@aar') {
+        transitive = true;
+    }
+    implementation ('sh.whisper:android-ana:1.4.1@aar') {
+        transitive = true;
+    }
 }
   

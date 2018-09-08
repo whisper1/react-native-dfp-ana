@@ -1,4 +1,4 @@
-package ai.medialab;
+package ai.medialab.rndfpana;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
@@ -10,11 +10,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class RNAdMobPackage implements ReactPackage {
+public class RNDfpAnaPackage implements ReactPackage {
 
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-        return Collections.emptyList();
+        return Arrays.<NativeModule>asList(new RNDfpAnaModule(reactContext));
     }
 
     // Deprecated from RN 0.47.0
@@ -25,7 +25,7 @@ public class RNAdMobPackage implements ReactPackage {
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
       return Arrays.<ViewManager>asList(
-          new RNPublisherBannerViewManager()
+          new RNDfpAnaBannerViewManager()
       );
     }
 }
