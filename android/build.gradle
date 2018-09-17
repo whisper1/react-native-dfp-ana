@@ -18,7 +18,13 @@ android {
 repositories {
     mavenCentral()
     maven { url 'https://s3.amazonaws.com/moat-sdk-builds' }
-    maven { url "http://172.25.200.50:8081/repository/maven-public/" }
+    maven {
+        url 'https://repos.whisper.sh/repository/maven-public/'
+        credentials {
+            username 'cocoapps'
+            password 'repos.whisper'
+        }
+    }
 }
 
 dependencies {
