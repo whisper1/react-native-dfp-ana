@@ -11,6 +11,7 @@ class Tracking {
         static final String AD_PLAY_STORE_REDIRECT_BLOCKED = "Ad App Store Redirect Blocked";
         static final String AD_MRAID_BLOCKED = "Ad MRAID Blocked";
         static final String AD_MRAID_DISPLAYED = "Ad MRAID Displayed";
+        static final String AD_REQUEST_EXCEPTION = "Ad Request Exception";
     }
 
     static class Property {
