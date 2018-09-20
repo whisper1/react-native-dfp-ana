@@ -1,5 +1,6 @@
 package ai.medialab.rndfpana;
 
+import android.app.Activity;
 import android.util.Log;
 
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -25,9 +26,16 @@ public class RNDfpAnaModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void init(String userId, String baseUrl, int userAge, String gender) {
+    public void init(String userId, String baseUrl, int age, String gender) {
         Log.v(TAG, "Initializing libraries with uid: " + userId);
-        EventTracker.getInstance().init(getCurrentActivity(), userId);
-        Ana.getInstance().init(getCurrentActivity(), userId, baseUrl, userAge, UserGender.fromString(gender));
+        SessionInfo.set(userId, baseUrl, age, gender);
+        Activity activity = getCurrentActivity();
+        if (activity != null) {
+            EventTracker.getInstance().init(activity, userId);
+            Ana.getInstance().init(activity, userId, baseUrl, age, UserGender.fromString(gender));
+        } else {
+            // Will be retried in RNDfpAnaBannerViewManager
+            Log.e(TAG, "init - current activity was null");
+        }
     }
 }

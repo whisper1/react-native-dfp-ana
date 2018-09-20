@@ -31,6 +31,7 @@ import sh.whisper.eventtracker.EventTracker;
 public class DfpBannerAdLoader {
     private static final String TAG = "DfpBannerAdLoader";
     static final String ANA_BASE_URL = "http://ana-base.whisper.sh/ana/index.html";
+    private static final int INTERNAL_ERROR = -1;
     private static final int ANA_TIMEOUT_MILLIS = -1;
     private PublisherAdRequest mAdRequest;
     private PublisherAdView mAdView;
@@ -247,7 +248,21 @@ public class DfpBannerAdLoader {
 
     private void sendAdRequest() {
         if (mAdView != null) {
-            mAdView.loadAd(mAdRequest);
+            try {
+                mAdView.loadAd(mAdRequest);
+            } catch (Exception ex) {
+                Log.e(TAG, "loadAd ex: " + ex);
+                JSONObject extraJson = getCustomTargetingExtraJson(mAdRequest);
+                EventTracker.getInstance().trackEventWeaverOnly(Tracking.Event.AD_REQUEST_EXCEPTION,
+                        new Pair<>(Tracking.Property.COHORT, mAdUnitId),
+                        new Pair<>(Tracking.Property.OBJECT_TYPE, "ANA"),
+                        new Pair<>(Tracking.Property.EXTRA_JSON, extraJson != null ? extraJson.toString() : null));
+                AdListener adListener = mAdView.getAdListener();
+                if (adListener != null) {
+                    // Need to reset state so ad refreshing will continue.
+                    adListener.onAdFailedToLoad(INTERNAL_ERROR);
+                }
+            }
         }
 
         JSONObject extraJson = getCustomTargetingExtraJson(mAdRequest);
