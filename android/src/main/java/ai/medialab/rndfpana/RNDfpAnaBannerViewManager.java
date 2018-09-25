@@ -34,13 +34,25 @@ public class RNDfpAnaBannerViewManager extends ViewGroupManager<ReactPublisherAd
     public static final String PROP_AD_UNIT_ID = "adUnitID";
     public static final String PROP_TEST_DEVICES = "testDevices";
 
-    public static final String EVENT_SIZE_CHANGE = "onSizeChange";
-    public static final String EVENT_AD_LOADED = "onAdLoaded";
-    public static final String EVENT_AD_FAILED_TO_LOAD = "onAdFailedToLoad";
-    public static final String EVENT_AD_OPENED = "onAdOpened";
-    public static final String EVENT_AD_CLOSED = "onAdClosed";
-    public static final String EVENT_AD_LEFT_APPLICATION = "onAdLeftApplication";
-    public static final String EVENT_APP_EVENT = "onAppEvent";
+    public enum Event {
+        ON_SIZE_CHANGED("onSizeChanged"),
+        ON_AD_LOADED("onAdLoaded"),
+        ON_AD_FAILED_TO_LOAD("onAdFailedToLoad"),
+        ON_AD_OPENED("onAdOpened"),
+        ON_AD_CLOSED("onAdClosed"),
+        ON_AD_LEFT_APPLICATION("onAdLeftApplication"),
+        ON_APP_EVENT("onAppEvent");
+
+        String value;
+        Event(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+    }
 
     public enum Command {
         LOAD_BANNER,
@@ -70,17 +82,9 @@ public class RNDfpAnaBannerViewManager extends ViewGroupManager<ReactPublisherAd
     @Nullable
     public Map<String, Object> getExportedCustomDirectEventTypeConstants() {
         MapBuilder.Builder<String, Object> builder = MapBuilder.builder();
-        String[] events = {
-            EVENT_SIZE_CHANGE,
-            EVENT_AD_LOADED,
-            EVENT_AD_FAILED_TO_LOAD,
-            EVENT_AD_OPENED,
-            EVENT_AD_CLOSED,
-            EVENT_AD_LEFT_APPLICATION,
-            EVENT_APP_EVENT
-        };
-        for (int i = 0; i < events.length; i++) {
-            builder.put(events[i], MapBuilder.of("registrationName", events[i]));
+        for (int i = 0; i < Event.values().length; i++) {
+            String event = Event.values()[i].toString();
+            builder.put(event, MapBuilder.of("registrationName", event));
         }
         return builder.build();
     }
@@ -123,21 +127,21 @@ public class RNDfpAnaBannerViewManager extends ViewGroupManager<ReactPublisherAd
     }
 
     @Override
-    public void receiveCommand(ReactPublisherAdView root, int commandId, @javax.annotation.Nullable ReadableArray args) {
+    public void receiveCommand(ReactPublisherAdView view, int commandId, @javax.annotation.Nullable ReadableArray args) {
         Command command = Command.values()[commandId];
         Log.v(TAG, "receiveCommand: " + command);
         switch (command) {
             case LOAD_BANNER:
-                root.loadBanner();
+                view.loadBanner();
                 break;
             case RESUME_BANNER:
-                root.resumeBanner();
+                view.resumeBanner();
                 break;
             case PAUSE_BANNER:
-                root.pauseBanner();
+                view.pauseBanner();
                 break;
             case DESTROY_BANNER:
-                root.destroyBanner();
+                view.destroyBanner();
                 break;
         }
     }

@@ -65,8 +65,8 @@ class DfpAnaBanner extends Component {
   handleSizeChange(event) {
     const { height, width } = event.nativeEvent;
     this.setState({ style: { width, height } });
-    if (this.props.onSizeChange) {
-      this.props.onSizeChange({ width, height });
+    if (this.props.onSizeChanged) {
+      this.props.onSizeChanged({ width, height });
     }
   }
 
@@ -88,7 +88,7 @@ class DfpAnaBanner extends Component {
       <RNDfpAnaBannerView
         {...this.props}
         style={[this.props.style, this.state.style]}
-        onSizeChange={this.handleSizeChange}
+        onSizeChanged={this.handleSizeChange}
         onAdFailedToLoad={this.handleAdFailedToLoad}
         onAppEvent={this.handleAppEvent}
         ref={el => (this._bannerView = el)}
@@ -105,7 +105,7 @@ DfpAnaBanner.propTypes = {
   adSize: string, // Only 'banner' is supported currently
   adUnitID: string,
   testDevices: arrayOf(string),
-  onSizeChange: func,
+  onSizeChanged: func,
   onAdLoaded: func,
   onAdFailedToLoad: func,
   onAdOpened: func,

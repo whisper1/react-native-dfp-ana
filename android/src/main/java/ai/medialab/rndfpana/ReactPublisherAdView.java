@@ -62,12 +62,12 @@ class ReactPublisherAdView extends ReactViewGroup implements AppEventListener, L
         addView(mAdView);
     }
 
-    private void sendOnSizeChangeEvent() {
+    private void sendOnSizeChangedEvent() {
         WritableMap event = Arguments.createMap();
         AdSize adSize = mAdView.getAdSize();
         event.putDouble("width", adSize.getWidth());
         event.putDouble("height", adSize.getHeight());
-        sendEvent(RNDfpAnaBannerViewManager.EVENT_SIZE_CHANGE, event);
+        sendEvent(RNDfpAnaBannerViewManager.Event.ON_SIZE_CHANGED.toString(), event);
     }
 
     private void sendEvent(String name, @Nullable WritableMap event) {
@@ -129,14 +129,14 @@ class ReactPublisherAdView extends ReactViewGroup implements AppEventListener, L
                     int top = mAdView.getTop();
                     mAdView.measure(width, height);
                     mAdView.layout(left, top, left + width, top + height);
-                    sendOnSizeChangeEvent();
-                    sendEvent(RNDfpAnaBannerViewManager.EVENT_AD_LOADED, null);
+                    sendOnSizeChangedEvent();
+                    sendEvent(RNDfpAnaBannerViewManager.Event.ON_AD_LOADED.toString(), null);
                 } else {
                     WritableMap event = Arguments.createMap();
                     WritableMap error = Arguments.createMap();
                     error.putString("message", "Request failed");
                     event.putMap("error", error);
-                    sendEvent(RNDfpAnaBannerViewManager.EVENT_AD_FAILED_TO_LOAD, event);
+                    sendEvent(RNDfpAnaBannerViewManager.Event.ON_AD_FAILED_TO_LOAD.toString(), event);
                 }
             }
         });
@@ -157,6 +157,6 @@ class ReactPublisherAdView extends ReactViewGroup implements AppEventListener, L
         WritableMap event = Arguments.createMap();
         event.putString("name", name);
         event.putString("info", info);
-        sendEvent(RNDfpAnaBannerViewManager.EVENT_APP_EVENT, event);
+        sendEvent(RNDfpAnaBannerViewManager.Event.ON_APP_EVENT.toString(), event);
     }
 }
