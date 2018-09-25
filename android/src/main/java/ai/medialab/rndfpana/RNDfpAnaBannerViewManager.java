@@ -30,11 +30,11 @@ public class RNDfpAnaBannerViewManager extends ViewGroupManager<ReactPublisherAd
     private static final String TAG = "RNDfpAnaBannerView";
     public static final String REACT_CLASS = "RNDfpAnaBannerView";
 
-    public static final String PROP_AD_SIZE = "adSize";
-    public static final String PROP_AD_UNIT_ID = "adUnitID";
-    public static final String PROP_TEST_DEVICES = "testDevices";
+    private static final String PROP_AD_SIZE = "adSize";
+    private static final String PROP_AD_UNIT_ID = "adUnitID";
+    private static final String PROP_TEST_DEVICES = "testDevices";
 
-    public enum Event {
+    enum Event {
         ON_SIZE_CHANGED("onSizeChanged"),
         ON_AD_LOADED("onAdLoaded"),
         ON_AD_FAILED_TO_LOAD("onAdFailedToLoad"),
@@ -54,7 +54,7 @@ public class RNDfpAnaBannerViewManager extends ViewGroupManager<ReactPublisherAd
         }
     }
 
-    public enum Command {
+    enum Command {
         LOAD_BANNER,
         RESUME_BANNER,
         PAUSE_BANNER,
