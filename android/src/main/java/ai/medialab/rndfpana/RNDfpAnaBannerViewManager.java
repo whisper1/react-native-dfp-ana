@@ -5,14 +5,12 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.facebook.react.bridge.ReadableArray;
-import com.facebook.react.bridge.ReadableNativeArray;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.google.android.gms.ads.AdSize;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -20,11 +18,6 @@ import java.util.Map;
 import sh.whisper.ads.Ana;
 import sh.whisper.ads.UserGender;
 import sh.whisper.eventtracker.EventTracker;
-
-import static ai.medialab.rndfpana.RNDfpAnaBannerViewManager.Command.DESTROY_BANNER;
-import static ai.medialab.rndfpana.RNDfpAnaBannerViewManager.Command.LOAD_BANNER;
-import static ai.medialab.rndfpana.RNDfpAnaBannerViewManager.Command.PAUSE_BANNER;
-import static ai.medialab.rndfpana.RNDfpAnaBannerViewManager.Command.RESUME_BANNER;
 
 public class RNDfpAnaBannerViewManager extends ViewGroupManager<ReactPublisherAdView> {
     private static final String TAG = "RNDfpAnaBannerView";
@@ -55,10 +48,20 @@ public class RNDfpAnaBannerViewManager extends ViewGroupManager<ReactPublisherAd
     }
 
     enum Command {
-        LOAD_BANNER,
-        RESUME_BANNER,
-        PAUSE_BANNER,
-        DESTROY_BANNER
+        LOAD_BANNER("loadBanner"),
+        RESUME_BANNER("resumeBanner"),
+        PAUSE_BANNER("pauseBanner"),
+        DESTROY_BANNER("destroyBanner");
+
+        String value;
+        Command(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
     }
 
     @Override
@@ -82,9 +85,8 @@ public class RNDfpAnaBannerViewManager extends ViewGroupManager<ReactPublisherAd
     @Nullable
     public Map<String, Object> getExportedCustomDirectEventTypeConstants() {
         MapBuilder.Builder<String, Object> builder = MapBuilder.builder();
-        for (int i = 0; i < Event.values().length; i++) {
-            String event = Event.values()[i].toString();
-            builder.put(event, MapBuilder.of("registrationName", event));
+        for (Event event : Event.values()) {
+            builder.put(event.toString(), MapBuilder.of("registrationName", event.toString()));
         }
         return builder.build();
     }
@@ -102,9 +104,7 @@ public class RNDfpAnaBannerViewManager extends ViewGroupManager<ReactPublisherAd
 
     @ReactProp(name = PROP_TEST_DEVICES)
     public void setPropTestDevices(final ReactPublisherAdView view, final ReadableArray testDevices) {
-        ReadableNativeArray nativeArray = (ReadableNativeArray)testDevices;
-        ArrayList<Object> list = nativeArray.toArrayList();
-        view.setTestDevices(list.toArray(new String[list.size()]));
+
     }
 
     private AdSize getAdSizeFromString(String value) {
@@ -119,10 +119,9 @@ public class RNDfpAnaBannerViewManager extends ViewGroupManager<ReactPublisherAd
     @Override
     public Map<String, Integer> getCommandsMap() {
         HashMap<String, Integer> map = new HashMap<>();
-        map.put("loadBanner", LOAD_BANNER.ordinal());
-        map.put("resumeBanner", RESUME_BANNER.ordinal());
-        map.put("pauseBanner", PAUSE_BANNER.ordinal());
-        map.put("destroyBanner", DESTROY_BANNER.ordinal());
+        for (Command command : Command.values()) {
+            map.put(command.toString(), command.ordinal());
+        }
         return map;
     }
 

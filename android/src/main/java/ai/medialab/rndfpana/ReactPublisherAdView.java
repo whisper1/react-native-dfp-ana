@@ -144,10 +144,6 @@ class ReactPublisherAdView extends ReactViewGroup implements AppEventListener, L
         mAdLoader.loadAd(true);
     }
 
-    public void setTestDevices(String[] testDevices) {
-
-    }
-
     public void setAdSize(AdSize adSize) {
         mAdSize = adSize;
     }
