@@ -3,7 +3,6 @@ package ai.medialab.rndfpana;
 import android.app.Activity;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.View;
 
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableNativeArray;
@@ -15,23 +14,23 @@ import com.google.android.gms.ads.AdSize;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import sh.whisper.ads.Ana;
 import sh.whisper.ads.UserGender;
 import sh.whisper.eventtracker.EventTracker;
 
-import static ai.medialab.rndfpana.RNDfpAnaBannerViewManager.Command.COMMAND_DESTROY_BANNER;
-import static ai.medialab.rndfpana.RNDfpAnaBannerViewManager.Command.COMMAND_LOAD_BANNER;
-import static ai.medialab.rndfpana.RNDfpAnaBannerViewManager.Command.COMMAND_PAUSE_BANNER;
-import static ai.medialab.rndfpana.RNDfpAnaBannerViewManager.Command.COMMAND_RESUME_BANNER;
+import static ai.medialab.rndfpana.RNDfpAnaBannerViewManager.Command.DESTROY_BANNER;
+import static ai.medialab.rndfpana.RNDfpAnaBannerViewManager.Command.LOAD_BANNER;
+import static ai.medialab.rndfpana.RNDfpAnaBannerViewManager.Command.PAUSE_BANNER;
+import static ai.medialab.rndfpana.RNDfpAnaBannerViewManager.Command.RESUME_BANNER;
 
 public class RNDfpAnaBannerViewManager extends ViewGroupManager<ReactPublisherAdView> {
     private static final String TAG = "RNDfpAnaBannerView";
     public static final String REACT_CLASS = "RNDfpAnaBannerView";
 
     public static final String PROP_AD_SIZE = "adSize";
-    public static final String PROP_VALID_AD_SIZES = "validAdSizes";
     public static final String PROP_AD_UNIT_ID = "adUnitID";
     public static final String PROP_TEST_DEVICES = "testDevices";
 
@@ -44,10 +43,10 @@ public class RNDfpAnaBannerViewManager extends ViewGroupManager<ReactPublisherAd
     public static final String EVENT_APP_EVENT = "onAppEvent";
 
     public enum Command {
-        COMMAND_LOAD_BANNER,
-        COMMAND_RESUME_BANNER,
-        COMMAND_PAUSE_BANNER,
-        COMMAND_DESTROY_BANNER
+        LOAD_BANNER,
+        RESUME_BANNER,
+        PAUSE_BANNER,
+        DESTROY_BANNER
     }
 
     @Override
@@ -64,13 +63,7 @@ public class RNDfpAnaBannerViewManager extends ViewGroupManager<ReactPublisherAd
         EventTracker.getInstance().init(activity, SessionInfo.getUserId());
         Ana.getInstance().init(activity, SessionInfo.getUserId(), SessionInfo.getBaseUrl(),
                 SessionInfo.getAge(), UserGender.fromString(SessionInfo.getGender()));
-        ReactPublisherAdView adView = new ReactPublisherAdView(themedReactContext);
-        return adView;
-    }
-
-    @Override
-    public void addView(ReactPublisherAdView parent, View child, int index) {
-        throw new RuntimeException("ReactPublisherAdView cannot have subviews");
+        return new ReactPublisherAdView(themedReactContext);
     }
 
     @Override
@@ -98,20 +91,6 @@ public class RNDfpAnaBannerViewManager extends ViewGroupManager<ReactPublisherAd
         view.setAdSize(adSize);
     }
 
-    @ReactProp(name = PROP_VALID_AD_SIZES)
-    public void setPropValidAdSizes(final ReactPublisherAdView view, final ReadableArray adSizeStrings) {
-        ReadableNativeArray nativeArray = (ReadableNativeArray)adSizeStrings;
-        ArrayList<Object> list = nativeArray.toArrayList();
-        String[] adSizeStringsArray = list.toArray(new String[list.size()]);
-        AdSize[] adSizes = new AdSize[list.size()];
-
-        for (int i = 0; i < adSizeStringsArray.length; i++) {
-                String adSizeString = adSizeStringsArray[i];
-                adSizes[i] = getAdSizeFromString(adSizeString);
-        }
-        view.setValidAdSizes(adSizes);
-    }
-
     @ReactProp(name = PROP_AD_UNIT_ID)
     public void setPropAdUnitID(final ReactPublisherAdView view, final String adUnitID) {
         view.setAdUnitID(adUnitID);
@@ -124,26 +103,11 @@ public class RNDfpAnaBannerViewManager extends ViewGroupManager<ReactPublisherAd
         view.setTestDevices(list.toArray(new String[list.size()]));
     }
 
-    private AdSize getAdSizeFromString(String adSize) {
-        switch (adSize) {
-            case "banner":
-                return AdSize.BANNER;
-            case "largeBanner":
-                return AdSize.LARGE_BANNER;
-            case "mediumRectangle":
-                return AdSize.MEDIUM_RECTANGLE;
-            case "fullBanner":
-                return AdSize.FULL_BANNER;
-            case "leaderBoard":
-                return AdSize.LEADERBOARD;
-            case "smartBannerPortrait":
-                return AdSize.SMART_BANNER;
-            case "smartBannerLandscape":
-                return AdSize.SMART_BANNER;
-            case "smartBanner":
-                return AdSize.SMART_BANNER;
-            default:
-                return AdSize.BANNER;
+    private AdSize getAdSizeFromString(String value) {
+        if (value != null && value.toLowerCase(Locale.US).contains("medium")) {
+            return AdSize.MEDIUM_RECTANGLE;
+        } else {
+            return AdSize.BANNER;
         }
     }
 
@@ -151,10 +115,10 @@ public class RNDfpAnaBannerViewManager extends ViewGroupManager<ReactPublisherAd
     @Override
     public Map<String, Integer> getCommandsMap() {
         HashMap<String, Integer> map = new HashMap<>();
-        map.put("loadBanner", COMMAND_LOAD_BANNER.ordinal());
-        map.put("resumeBanner", COMMAND_RESUME_BANNER.ordinal());
-        map.put("pauseBanner", COMMAND_PAUSE_BANNER.ordinal());
-        map.put("destroyBanner", COMMAND_DESTROY_BANNER.ordinal());
+        map.put("loadBanner", LOAD_BANNER.ordinal());
+        map.put("resumeBanner", RESUME_BANNER.ordinal());
+        map.put("pauseBanner", PAUSE_BANNER.ordinal());
+        map.put("destroyBanner", DESTROY_BANNER.ordinal());
         return map;
     }
 
@@ -163,16 +127,16 @@ public class RNDfpAnaBannerViewManager extends ViewGroupManager<ReactPublisherAd
         Command command = Command.values()[commandId];
         Log.v(TAG, "receiveCommand: " + command);
         switch (command) {
-            case COMMAND_LOAD_BANNER:
+            case LOAD_BANNER:
                 root.loadBanner();
                 break;
-            case COMMAND_RESUME_BANNER:
+            case RESUME_BANNER:
                 root.resumeBanner();
                 break;
-            case COMMAND_PAUSE_BANNER:
+            case PAUSE_BANNER:
                 root.pauseBanner();
                 break;
-            case COMMAND_DESTROY_BANNER:
+            case DESTROY_BANNER:
                 root.destroyBanner();
                 break;
         }

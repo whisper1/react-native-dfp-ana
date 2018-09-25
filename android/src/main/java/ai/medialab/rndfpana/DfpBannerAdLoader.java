@@ -57,7 +57,7 @@ public class DfpBannerAdLoader {
     }
 
     public DfpBannerAdLoader(PublisherAdView adView, String adUnitId, int refreshIntervalSeconds, @Nullable Location location, @Nullable BannerLoadListener externalListener) {
-        Log.v(TAG, "Creating DfpBannerAdLoader for adView: " + adView);
+        Log.v(TAG, "Creating DfpBannerAdLoader for mAdView: " + adView);
         mAdView = adView;
         mExternalAdListener = externalListener;
         mLocation = location;

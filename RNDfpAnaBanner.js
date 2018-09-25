@@ -62,8 +62,6 @@ class DfpAnaBanner extends Component {
     );
   }
 
-
-
   handleSizeChange(event) {
     const { height, width } = event.nativeEvent;
     this.setState({ style: { width, height } });
@@ -104,41 +102,10 @@ DfpAnaBanner.simulatorId = 'SIMULATOR';
 DfpAnaBanner.propTypes = {
   ...ViewPropTypes,
 
-  /**
-   * DFP iOS library banner size constants
-   * (https://developers.google.com/admob/ios/banner)
-   * banner (320x50, Standard Banner for Phones and Tablets)
-   * largeBanner (320x100, Large Banner for Phones and Tablets)
-   * mediumRectangle (300x250, IAB Medium Rectangle for Phones and Tablets)
-   * fullBanner (468x60, IAB Full-Size Banner for Tablets)
-   * leaderboard (728x90, IAB Leaderboard for Tablets)
-   * smartBannerPortrait (Screen width x 32|50|90, Smart Banner for Phones and Tablets)
-   * smartBannerLandscape (Screen width x 32|50|90, Smart Banner for Phones and Tablets)
-   *
-   * banner is default
-   */
-  adSize: string,
-
-  /**
-   * Optional array specifying all valid sizes that are appropriate for this slot.
-   */
-  validAdSizes: arrayOf(string),
-
-  /**
-   * DFP ad unit ID
-   */
+  adSize: string, // Only 'banner' is supported currently
   adUnitID: string,
-
-  /**
-   * Array of test devices. Use DfpAnaBanner.simulatorId for the simulator
-   */
   testDevices: arrayOf(string),
-
   onSizeChange: func,
-
-  /**
-   * DFP library events
-   */
   onAdLoaded: func,
   onAdFailedToLoad: func,
   onAdOpened: func,
