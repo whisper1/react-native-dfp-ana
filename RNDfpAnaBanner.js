@@ -6,12 +6,13 @@ import {
   ViewPropTypes,
   NativeModules
 } from 'react-native';
-import { string, func, arrayOf } from 'prop-types';
-
-import { createErrorFromErrorData } from './utils';
+import {
+  string,
+  func,
+  arrayOf
+} from 'prop-types';
 
 class DfpAnaBanner extends Component {
-
   constructor() {
     super();
     this.handleSizeChange = this.handleSizeChange.bind(this);
@@ -62,13 +63,11 @@ class DfpAnaBanner extends Component {
     );
   }
 
-
-
   handleSizeChange(event) {
     const { height, width } = event.nativeEvent;
     this.setState({ style: { width, height } });
-    if (this.props.onSizeChange) {
-      this.props.onSizeChange({ width, height });
+    if (this.props.onSizeChanged) {
+      this.props.onSizeChanged({ width, height });
     }
   }
 
@@ -81,7 +80,7 @@ class DfpAnaBanner extends Component {
 
   handleAdFailedToLoad(event) {
     if (this.props.onAdFailedToLoad) {
-      this.props.onAdFailedToLoad(createErrorFromErrorData(event.nativeEvent.error));
+      this.props.onAdFailedToLoad(event.nativeEvent.error);
     }
   }
 
@@ -90,7 +89,7 @@ class DfpAnaBanner extends Component {
       <RNDfpAnaBannerView
         {...this.props}
         style={[this.props.style, this.state.style]}
-        onSizeChange={this.handleSizeChange}
+        onSizeChanged={this.handleSizeChange}
         onAdFailedToLoad={this.handleAdFailedToLoad}
         onAppEvent={this.handleAppEvent}
         ref={el => (this._bannerView = el)}
@@ -104,41 +103,10 @@ DfpAnaBanner.simulatorId = 'SIMULATOR';
 DfpAnaBanner.propTypes = {
   ...ViewPropTypes,
 
-  /**
-   * DFP iOS library banner size constants
-   * (https://developers.google.com/admob/ios/banner)
-   * banner (320x50, Standard Banner for Phones and Tablets)
-   * largeBanner (320x100, Large Banner for Phones and Tablets)
-   * mediumRectangle (300x250, IAB Medium Rectangle for Phones and Tablets)
-   * fullBanner (468x60, IAB Full-Size Banner for Tablets)
-   * leaderboard (728x90, IAB Leaderboard for Tablets)
-   * smartBannerPortrait (Screen width x 32|50|90, Smart Banner for Phones and Tablets)
-   * smartBannerLandscape (Screen width x 32|50|90, Smart Banner for Phones and Tablets)
-   *
-   * banner is default
-   */
-  adSize: string,
-
-  /**
-   * Optional array specifying all valid sizes that are appropriate for this slot.
-   */
-  validAdSizes: arrayOf(string),
-
-  /**
-   * DFP ad unit ID
-   */
+  adSize: string, // Only 'banner' is supported currently
   adUnitID: string,
-
-  /**
-   * Array of test devices. Use DfpAnaBanner.simulatorId for the simulator
-   */
   testDevices: arrayOf(string),
-
-  onSizeChange: func,
-
-  /**
-   * DFP library events
-   */
+  onSizeChanged: func,
   onAdLoaded: func,
   onAdFailedToLoad: func,
   onAdOpened: func,

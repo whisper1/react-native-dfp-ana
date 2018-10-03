@@ -2,37 +2,33 @@ package ai.medialab.rndfpana;
 
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.uimanager.PixelUtil;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.facebook.react.views.view.ReactViewGroup;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.doubleclick.AppEventListener;
-import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
 import com.google.android.gms.ads.doubleclick.PublisherAdView;
-
-import java.util.ArrayList;
 
 class ReactPublisherAdView extends ReactViewGroup implements AppEventListener, LifecycleEventListener {
     private static final String TAG = "ReactPublisherAdView";
     private static final int REFRESH_INTERVAL_SECONDS = 10;
-    protected PublisherAdView adView;
-    protected DfpBannerAdLoader adLoader;
-    String[] testDevices;
-    AdSize[] validAdSizes;
-    String adUnitID;
-    AdSize adSize;
-    ReactContext reactContext;
+    private PublisherAdView mAdView;
+    private DfpBannerAdLoader mAdLoader;
+    private String mAdUnitId;
+    private AdSize mAdSize;
+    private ReactContext mReactContext;
 
     public ReactPublisherAdView(final ReactContext context) {
         super(context);
-        reactContext = context;
-        reactContext.addLifecycleEventListener(this);
-        this.createAdView();
+        mReactContext = context;
+        mReactContext.addLifecycleEventListener(this);
+        createAdView();
     }
 
     @Override
@@ -54,144 +50,100 @@ class ReactPublisherAdView extends ReactViewGroup implements AppEventListener, L
     }
 
     private void createAdView() {
-        if (this.adView != null) this.adView.destroy();
-        this.adView = new PublisherAdView(reactContext.getCurrentActivity());
-        this.adView.setAppEventListener(this);
-        this.addView(this.adView);
+        if (mAdView != null) {
+            ViewParent parent = mAdView.getParent();
+            if (parent != null && parent instanceof ViewGroup) {
+                ((ViewGroup) parent).removeView(mAdView);
+            }
+            mAdView.destroy();
+        }
+        mAdView = new PublisherAdView(mReactContext.getCurrentActivity());
+        mAdView.setAppEventListener(this);
+        addView(mAdView);
     }
 
-    private void sendOnSizeChangeEvent() {
-        int width;
-        int height;
+    private void sendOnSizeChangedEvent() {
         WritableMap event = Arguments.createMap();
-        AdSize adSize = this.adView.getAdSize();
-        if (adSize == AdSize.SMART_BANNER) {
-            width = (int) PixelUtil.toDIPFromPixel(adSize.getWidthInPixels(reactContext));
-            height = (int) PixelUtil.toDIPFromPixel(adSize.getHeightInPixels(reactContext));
-        } else {
-            width = adSize.getWidth();
-            height = adSize.getHeight();
-        }
-        event.putDouble("width", width);
-        event.putDouble("height", height);
-        sendEvent(RNDfpAnaBannerViewManager.EVENT_SIZE_CHANGE, event);
+        AdSize adSize = mAdView.getAdSize();
+        event.putDouble("width", adSize.getWidth());
+        event.putDouble("height", adSize.getHeight());
+        sendEvent(RNDfpAnaBannerViewManager.Event.ON_SIZE_CHANGED.toString(), event);
     }
 
     private void sendEvent(String name, @Nullable WritableMap event) {
-        reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
-                getId(),
-                name,
-                event);
+        mReactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), name, event);
     }
 
     public void loadBanner() {
-        ArrayList<AdSize> adSizes = new ArrayList<AdSize>();
-        if (this.adSize != null) {
-            adSizes.add(this.adSize);
-        }
-        if (this.validAdSizes != null) {
-            for (int i = 0; i < this.validAdSizes.length; i++) {
-                adSizes.add(this.validAdSizes[i]);
-            }
+        if (mAdSize != null) {
+            mAdView.setAdSizes(mAdSize);
+        } else {
+            mAdView.setAdSizes(AdSize.BANNER);
         }
 
-        if (adSizes.size() == 0) {
-            adSizes.add(AdSize.BANNER);
-        }
-
-        AdSize[] adSizesArray = adSizes.toArray(new AdSize[adSizes.size()]);
-        this.adView.setAdSizes(adSizesArray);
-
-        if (adLoader != null) {
-            adLoader.loadAd(true);
+        if (mAdLoader != null) {
+            mAdLoader.loadAd(true);
         }
     }
 
     public void resumeBanner() {
         Log.v(TAG, "resumeBanner");
-        if (adLoader != null) {
-            adLoader.resume(true);
+        if (mAdLoader != null) {
+            mAdLoader.resume(true);
         }
     }
 
     public void pauseBanner() {
         Log.v(TAG, "pauseBanner");
-        if (adLoader != null) {
-            adLoader.pause();
+        if (mAdLoader != null) {
+            mAdLoader.pause();
         }
     }
 
     public void destroyBanner() {
         Log.v(TAG, "destroyBanner");
-        if (adLoader != null) {
-            adLoader.pause();
-            adLoader.destroy();
-            adLoader = null;
+        if (mAdLoader != null) {
+            mAdLoader.pause();
+            mAdLoader.destroy();
+            mAdLoader = null;
         }
     }
 
     public void setAdUnitID(String adUnitID) {
-        if (this.adUnitID != null) {
-            if (this.adUnitID.equals(adUnitID)) {
+        if (mAdUnitId != null) {
+            if (mAdUnitId.equals(adUnitID)) {
                 // Trying to set the same ad unit ID.  Just return.
                 return;
             }
-            // We can only set adUnitID once, so when it was previously set we have
-            // to recreate the view
-            this.createAdView();
+            createAdView();
         }
-        this.adUnitID = adUnitID;
-        this.adView.setAdUnitId(adUnitID);
-        adLoader = new DfpBannerAdLoader(this.adView, adUnitID, REFRESH_INTERVAL_SECONDS, null, new DfpBannerAdLoader.BannerLoadListener() {
+        mAdUnitId = adUnitID;
+        mAdView.setAdUnitId(adUnitID);
+        mAdLoader = new DfpBannerAdLoader(mAdView, adUnitID, REFRESH_INTERVAL_SECONDS, null, new DfpBannerAdLoader.BannerLoadListener() {
             @Override
             public void onLoadFinished(boolean success, int errorCode) {
                 if (success) {
-                    int width = adView.getAdSize().getWidthInPixels(adView.getContext());
-                    int height = adView.getAdSize().getHeightInPixels(adView.getContext());
-                    int left = adView.getLeft();
-                    int top = adView.getTop();
-                    adView.measure(width, height);
-                    adView.layout(left, top, left + width, top + height);
-                    sendOnSizeChangeEvent();
-                    sendEvent(RNDfpAnaBannerViewManager.EVENT_AD_LOADED, null);
+                    int width = mAdView.getAdSize().getWidthInPixels(mAdView.getContext());
+                    int height = mAdView.getAdSize().getHeightInPixels(mAdView.getContext());
+                    int left = mAdView.getLeft();
+                    int top = mAdView.getTop();
+                    mAdView.measure(width, height);
+                    mAdView.layout(left, top, left + width, top + height);
+                    sendOnSizeChangedEvent();
+                    sendEvent(RNDfpAnaBannerViewManager.Event.ON_AD_LOADED.toString(), null);
                 } else {
-                    String errorMessage = "Unknown error";
-                    switch (errorCode) {
-                        case PublisherAdRequest.ERROR_CODE_INTERNAL_ERROR:
-                            errorMessage = "Internal error, an invalid response was received from the ad server.";
-                            break;
-                        case PublisherAdRequest.ERROR_CODE_INVALID_REQUEST:
-                            errorMessage = "Invalid ad request, possibly an incorrect ad unit ID was given.";
-                            break;
-                        case PublisherAdRequest.ERROR_CODE_NETWORK_ERROR:
-                            errorMessage = "The ad request was unsuccessful due to network connectivity.";
-                            break;
-                        case PublisherAdRequest.ERROR_CODE_NO_FILL:
-                            errorMessage = "The ad request was successful, but no ad was returned due to lack of ad inventory.";
-                            break;
-                    }
                     WritableMap event = Arguments.createMap();
-                    WritableMap error = Arguments.createMap();
-                    error.putString("message", errorMessage);
-                    event.putMap("error", error);
-                    sendEvent(RNDfpAnaBannerViewManager.EVENT_AD_FAILED_TO_LOAD, event);
+                    event.putString("error", "Request failed: " + String.valueOf(errorCode));
+                    sendEvent(RNDfpAnaBannerViewManager.Event.ON_AD_FAILED_TO_LOAD.toString(), event);
                 }
             }
         });
 
-        adLoader.loadAd(true);
-    }
-
-    public void setTestDevices(String[] testDevices) {
-        this.testDevices = testDevices;
+        mAdLoader.loadAd(true);
     }
 
     public void setAdSize(AdSize adSize) {
-        this.adSize = adSize;
-    }
-
-    public void setValidAdSizes(AdSize[] adSizes) {
-        this.validAdSizes = adSizes;
+        mAdSize = adSize;
     }
 
     @Override
@@ -199,6 +151,6 @@ class ReactPublisherAdView extends ReactViewGroup implements AppEventListener, L
         WritableMap event = Arguments.createMap();
         event.putString("name", name);
         event.putString("info", info);
-        sendEvent(RNDfpAnaBannerViewManager.EVENT_APP_EVENT, event);
+        sendEvent(RNDfpAnaBannerViewManager.Event.ON_APP_EVENT.toString(), event);
     }
 }

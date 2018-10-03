@@ -30,10 +30,10 @@ repositories {
 dependencies {
     implementation 'com.facebook.react:react-native:+'
     implementation 'com.google.android.gms:play-services-ads:+'
-    implementation('sh.whisper:android-datametrical:1.1.0@aar') {
+    implementation('sh.whisper:android-datametrical:1.1.1@aar') {
         transitive = true;
     }
-    implementation ('sh.whisper:android-ana:1.4.1@aar') {
+    implementation ('sh.whisper:android-ana:1.4.2@aar') {
         transitive = true;
     }
 }
