@@ -5,5 +5,8 @@ module.exports = {
   },
   get DfpAnaBanner() {
     return require('./RNDfpAnaBanner').default;
-  }
+  },
+  get DFPInterstitial() {
+    return require('./RNDFPInterstitial').default;
+  },
 };
