@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29352308D51872375BC1E536 /* Pods_RNDfpAna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCAC3AFF8F38033C49859E9F /* Pods_RNDfpAna.framework */; };
+		6C6E9997215DD4AD004AF18B /* RNDfpAnaBannerViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6E9996215DD4AD004AF18B /* RNDfpAnaBannerViewManager.m */; };
+		6CA7521E216C1A3B00F36949 /* RNDfpAnaInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA7521C216C1A3A00F36949 /* RNDfpAnaInterstitial.m */; };
+		6CA956202166BF710058830B /* AnaAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA9561F2166BF710058830B /* AnaAdapter.swift */; };
+		6CA95657216822A50058830B /* RNDfpAnaBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA95656216822A50058830B /* RNDfpAnaBannerView.m */; };
+		6CA9565B216831170058830B /* RCTConvert+GADAdSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA9565A216831170058830B /* RCTConvert+GADAdSize.m */; };
 		B3E7B58A1CC2AC0600A0062D /* RNDfpAna.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNDfpAna.m */; };
 /* End PBXBuildFile section */
 
@@ -24,8 +30,21 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNDfpAna.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNDfpAna.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C6E9995215DD4AD004AF18B /* RNDfpAnaBannerViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNDfpAnaBannerViewManager.h; sourceTree = "<group>"; };
+		6C6E9996215DD4AD004AF18B /* RNDfpAnaBannerViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNDfpAnaBannerViewManager.m; sourceTree = "<group>"; };
+		6CA7521C216C1A3A00F36949 /* RNDfpAnaInterstitial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNDfpAnaInterstitial.m; sourceTree = "<group>"; };
+		6CA7521D216C1A3B00F36949 /* RNDfpAnaInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNDfpAnaInterstitial.h; sourceTree = "<group>"; };
+		6CA9561F2166BF710058830B /* AnaAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnaAdapter.swift; sourceTree = "<group>"; };
+		6CA9562E2166C1940058830B /* RNDfpAna-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RNDfpAna-Bridging-Header.h"; sourceTree = "<group>"; };
+		6CA95655216822A50058830B /* RNDfpAnaBannerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNDfpAnaBannerView.h; sourceTree = "<group>"; };
+		6CA95656216822A50058830B /* RNDfpAnaBannerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNDfpAnaBannerView.m; sourceTree = "<group>"; };
+		6CA95659216831170058830B /* RCTConvert+GADAdSize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RCTConvert+GADAdSize.h"; sourceTree = "<group>"; };
+		6CA9565A216831170058830B /* RCTConvert+GADAdSize.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "RCTConvert+GADAdSize.m"; sourceTree = "<group>"; };
+		79CCAD720587F1ABAF6ED0A6 /* Pods-RNDfpAna.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNDfpAna.release.xcconfig"; path = "Target Support Files/Pods-RNDfpAna/Pods-RNDfpAna.release.xcconfig"; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* RNDfpAna.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNDfpAna.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNDfpAna.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNDfpAna.m; sourceTree = "<group>"; };
+		BCAC3AFF8F38033C49859E9F /* Pods_RNDfpAna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RNDfpAna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C24AC6C8B69365ADD2FD3B9E /* Pods-RNDfpAna.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNDfpAna.debug.xcconfig"; path = "Target Support Files/Pods-RNDfpAna/Pods-RNDfpAna.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29352308D51872375BC1E536 /* Pods_RNDfpAna.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,13 +67,42 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		35C3F0C102F794EAAF39F245 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C24AC6C8B69365ADD2FD3B9E /* Pods-RNDfpAna.debug.xcconfig */,
+				79CCAD720587F1ABAF6ED0A6 /* Pods-RNDfpAna.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				6CA7521D216C1A3B00F36949 /* RNDfpAnaInterstitial.h */,
+				6CA7521C216C1A3A00F36949 /* RNDfpAnaInterstitial.m */,
+				6CA95659216831170058830B /* RCTConvert+GADAdSize.h */,
+				6CA9565A216831170058830B /* RCTConvert+GADAdSize.m */,
 				B3E7B5881CC2AC0600A0062D /* RNDfpAna.h */,
 				B3E7B5891CC2AC0600A0062D /* RNDfpAna.m */,
+				6CA95655216822A50058830B /* RNDfpAnaBannerView.h */,
+				6CA95656216822A50058830B /* RNDfpAnaBannerView.m */,
+				6C6E9995215DD4AD004AF18B /* RNDfpAnaBannerViewManager.h */,
+				6C6E9996215DD4AD004AF18B /* RNDfpAnaBannerViewManager.m */,
+				6CA9561F2166BF710058830B /* AnaAdapter.swift */,
+				6CA9562E2166C1940058830B /* RNDfpAna-Bridging-Header.h */,
 				134814211AA4EA7D00B7C361 /* Products */,
+				35C3F0C102F794EAAF39F245 /* Pods */,
+				948A489F30AC315AA5AE73EA /* Frameworks */,
 			);
+			sourceTree = "<group>";
+		};
+		948A489F30AC315AA5AE73EA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BCAC3AFF8F38033C49859E9F /* Pods_RNDfpAna.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -63,6 +112,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNDfpAna" */;
 			buildPhases = (
+				31238C025D24A3BEE67E7AB5 /* [CP] Check Pods Manifest.lock */,
 				58B511D71A9E6C8500147676 /* Sources */,
 				58B511D81A9E6C8500147676 /* Frameworks */,
 				58B511D91A9E6C8500147676 /* CopyFiles */,
@@ -87,6 +137,7 @@
 				TargetAttributes = {
 					58B511DA1A9E6C8500147676 = {
 						CreatedOnToolsVersion = 6.1.1;
+						LastSwiftMigration = 0940;
 					};
 				};
 			};
@@ -107,12 +158,38 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		31238C025D24A3BEE67E7AB5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RNDfpAna-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		58B511D71A9E6C8500147676 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CA9565B216831170058830B /* RCTConvert+GADAdSize.m in Sources */,
+				6CA956202166BF710058830B /* AnaAdapter.swift in Sources */,
+				6CA95657216822A50058830B /* RNDfpAnaBannerView.m in Sources */,
+				6C6E9997215DD4AD004AF18B /* RNDfpAnaBannerViewManager.m in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* RNDfpAna.m in Sources */,
+				6CA7521E216C1A3B00F36949 /* RNDfpAnaInterstitial.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,7 +233,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -193,7 +270,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -202,33 +279,44 @@
 		};
 		58B511F01A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C24AC6C8B69365ADD2FD3B9E /* Pods-RNDfpAna.debug.xcconfig */;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = (
-				"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../../../React/**",
-					"$(SRCROOT)/../../react-native/React/**",
-				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = RNDfpAna;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		58B511F11A9E6C8500147676 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
 				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = RNDfpAna;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "RNDfpAna-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		58B511F11A9E6C8500147676 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79CCAD720587F1ABAF6ED0A6 /* Pods-RNDfpAna.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../../React/**",
+					"$(SRCROOT)/../../react-native/React/**",
+				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = RNDfpAna;
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "RNDfpAna-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

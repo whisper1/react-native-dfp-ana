@@ -1,0 +1,29 @@
+PODS:
+  - Google-Mobile-Ads-SDK (7.32.0)
+  - Mixpanel-swift (2.2.3):
+    - Mixpanel-swift/Complete (= 2.2.3)
+  - Mixpanel-swift/Complete (2.2.3)
+  - MLAIAna (0.0.1)
+
+DEPENDENCIES:
+  - Google-Mobile-Ads-SDK (= 7.32.0)
+  - Mixpanel-swift (<= 2.2.3)
+  - MLAIAna (from `~/libPod`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Google-Mobile-Ads-SDK
+    - Mixpanel-swift
+
+EXTERNAL SOURCES:
+  MLAIAna:
+    :path: "~/libPod"
+
+SPEC CHECKSUMS:
+  Google-Mobile-Ads-SDK: 2aca87e46e860f1e1fc0fdc1201dd9caa4be9ba6
+  Mixpanel-swift: 4dd5681d25c372fb11f9254541988a4ddbcc1ac8
+  MLAIAna: 391c7a1b11bb271116dea6fd9049aca0d35f1144
+
+PODFILE CHECKSUM: 46703de391cb0e1a5d30f92e90bc78688e44d73b
+
+COCOAPODS: 1.6.0.beta.1
