@@ -1,8 +1,9 @@
 import Foundation
 //import CryptoSwift
-import MLAIAna
+//import MLAIAna
 import whisper
 import Datametrical
+import Mixpanel
 
 import GoogleMobileAds
 import AdSupport
@@ -120,7 +121,7 @@ extension AnaAdapter : AnaTracking {
     
     public func weaverOnlyTrackingEvent(name: String, objectID: String?, objectType: String?, cohort: String?, extra: String?, extraProperties: JSONDictionary) {
         print("[         AnaAdapter          ] : Tracking Event \(name)")
-//        WeaverOnlyTrackingEvent(name: name, objectID: objectID, objectType: objectType, cohort: cohort, extra: extra, extraProperties: extraProperties).submit()
+        WeaverOnlyTrackingEvent(name: name, objectID: objectID, objectType: objectType, cohort: cohort, extra: extra, extraProperties: extraProperties).submit()
     }
     
 }
