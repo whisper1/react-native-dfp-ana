@@ -1,0 +1,48 @@
+PODS:
+  - Ana (0.4.5):
+    - CryptoSwift
+    - Google-Mobile-Ads-SDK
+  - CryptoSwift (0.12.0)
+  - Datametrical (0.1.1):
+    - Mixpanel-swift
+  - Google-Mobile-Ads-SDK (7.32.0)
+  - Mixpanel-swift (2.2.3):
+    - Mixpanel-swift/Complete (= 2.2.3)
+  - Mixpanel-swift/Complete (2.2.3)
+
+DEPENDENCIES:
+  - "Ana (from `git@github.com:whisper1/ios-ana.git`)"
+  - "Datametrical (from `git@github.com:whisper1/ios-datametrical.git`)"
+  - Google-Mobile-Ads-SDK (= 7.32.0)
+  - Mixpanel-swift (<= 2.2.3)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - CryptoSwift
+    - Google-Mobile-Ads-SDK
+    - Mixpanel-swift
+
+EXTERNAL SOURCES:
+  Ana:
+    :git: "git@github.com:whisper1/ios-ana.git"
+  Datametrical:
+    :git: "git@github.com:whisper1/ios-datametrical.git"
+
+CHECKOUT OPTIONS:
+  Ana:
+    :commit: 969e4dfadfbf6f157bf702ffcb194a80d7bc9f91
+    :git: "git@github.com:whisper1/ios-ana.git"
+  Datametrical:
+    :commit: 44c7520c681314700f97e7e13c82fed5db6fe5e2
+    :git: "git@github.com:whisper1/ios-datametrical.git"
+
+SPEC CHECKSUMS:
+  Ana: 998567fc1c7ecf06f8aaad730e6bd4d647610cee
+  CryptoSwift: 1c07ca50843dd48bc54e6ea53d7a4dba3b645716
+  Datametrical: 95910db9582f730593735ac91dde7763313ebbf9
+  Google-Mobile-Ads-SDK: 2aca87e46e860f1e1fc0fdc1201dd9caa4be9ba6
+  Mixpanel-swift: 4dd5681d25c372fb11f9254541988a4ddbcc1ac8
+
+PODFILE CHECKSUM: 9ba1dbb5b5b314aa8f43a8ed33ae5375a4de760d
+
+COCOAPODS: 1.6.0.beta.1

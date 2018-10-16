@@ -116,5 +116,6 @@ DfpAnaBanner.propTypes = {
 };
 
 const RNDfpAnaBannerView = requireNativeComponent('RNDfpAnaBannerView', DfpAnaBanner);
+// module.exports = requireNativeComponent('RNDfpAnaBannerView', null);
 
 export default DfpAnaBanner;
