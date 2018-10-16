@@ -9,8 +9,8 @@ target 'RNDfpAna' do
 
 	pod 'Google-Mobile-Ads-SDK', '7.32.0'
 
-   pod 'Ana', :git => 'git@git.whisper.sh:dev/ios-ana.git'
-   pod 'Datametrical', :git => 'git@git.whisper.sh:dev/ios-datametrical.git'
+   pod 'Ana', :git => 'git@github.com:whisper1/ios-ana.git'
+   pod 'Datametrical', :git => 'git@github.com:whisper1/ios-datametrical.git'
    pod 'Mixpanel-swift', '<= 2.2.3'
 
 end

@@ -11,8 +11,8 @@ PODS:
   - Mixpanel-swift/Complete (2.2.3)
 
 DEPENDENCIES:
-  - "Ana (from `git@git.whisper.sh:dev/ios-ana.git`)"
-  - "Datametrical (from `git@git.whisper.sh:dev/ios-datametrical.git`)"
+  - "Ana (from `git@github.com:whisper1/ios-ana.git`)"
+  - "Datametrical (from `git@github.com:whisper1/ios-datametrical.git`)"
   - Google-Mobile-Ads-SDK (= 7.32.0)
   - Mixpanel-swift (<= 2.2.3)
 
@@ -24,17 +24,17 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   Ana:
-    :git: "git@git.whisper.sh:dev/ios-ana.git"
+    :git: "git@github.com:whisper1/ios-ana.git"
   Datametrical:
-    :git: "git@git.whisper.sh:dev/ios-datametrical.git"
+    :git: "git@github.com:whisper1/ios-datametrical.git"
 
 CHECKOUT OPTIONS:
   Ana:
-    :commit: 83d856583642a359a3ca24adaccc2bbdd1cbb0cd
-    :git: "git@git.whisper.sh:dev/ios-ana.git"
+    :commit: 969e4dfadfbf6f157bf702ffcb194a80d7bc9f91
+    :git: "git@github.com:whisper1/ios-ana.git"
   Datametrical:
     :commit: 44c7520c681314700f97e7e13c82fed5db6fe5e2
-    :git: "git@git.whisper.sh:dev/ios-datametrical.git"
+    :git: "git@github.com:whisper1/ios-datametrical.git"
 
 SPEC CHECKSUMS:
   Ana: 998567fc1c7ecf06f8aaad730e6bd4d647610cee
@@ -43,6 +43,6 @@ SPEC CHECKSUMS:
   Google-Mobile-Ads-SDK: 2aca87e46e860f1e1fc0fdc1201dd9caa4be9ba6
   Mixpanel-swift: 4dd5681d25c372fb11f9254541988a4ddbcc1ac8
 
-PODFILE CHECKSUM: d0a2db6d6767f2082fe4feac7981c70da7d1cb45
+PODFILE CHECKSUM: 9ba1dbb5b5b314aa8f43a8ed33ae5375a4de760d
 
 COCOAPODS: 1.6.0.beta.1
