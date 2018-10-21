@@ -104,6 +104,7 @@ DfpAnaBanner.propTypes = {
   ...ViewPropTypes,
 
   adSize: string, // Only 'banner' is supported currently
+  validAdSizes: arrayOf(string),
   adUnitID: string,
   testDevices: arrayOf(string),
   onSizeChanged: func,
