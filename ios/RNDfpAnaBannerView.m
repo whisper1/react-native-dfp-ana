@@ -81,10 +81,12 @@
                                  });
         }
     }
+    
+    AnaDelegateConfiguration.shared.appID = self.bannerView.appID
+
     DFPRequest *request = [DFPRequest request];
-    self.bannerView.adUnitID = @"/114106652/singleton_banner_ios";
     request.testDevices = _testDevices;
-    [AnaAdapter augmentWithRequest:request adUnit:@"/114106652/singleton_banner_ios" completion:^(DFPRequest * alteredRequest, NSError * e) {
+    [AnaAdapter augmentWithRequest:request adUnit:self.bannerView.adUnitID completion:^(DFPRequest * alteredRequest, NSError * e) {
         [NSOperationQueue.mainQueue addOperationWithBlock:^{
             [_bannerView loadRequest:alteredRequest];
         }];
