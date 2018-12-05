@@ -85,6 +85,7 @@ class DfpAnaBanner extends Component {
   }
 
   render() {
+    console.log('banner prop', this.props);
     return (
       <RNDfpAnaBannerView
         {...this.props}
@@ -104,7 +105,9 @@ DfpAnaBanner.propTypes = {
   ...ViewPropTypes,
 
   adSize: string, // Only 'banner' is supported currently
+  validAdSizes: arrayOf(string),
   adUnitID: string,
+  appID: string,
   testDevices: arrayOf(string),
   onSizeChanged: func,
   onAdLoaded: func,
@@ -116,5 +119,6 @@ DfpAnaBanner.propTypes = {
 };
 
 const RNDfpAnaBannerView = requireNativeComponent('RNDfpAnaBannerView', DfpAnaBanner);
+// module.exports = requireNativeComponent('RNDfpAnaBannerView', null);
 
 export default DfpAnaBanner;

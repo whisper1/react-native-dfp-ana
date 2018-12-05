@@ -1,0 +1,16 @@
+platform :ios, '10.0'
+inhibit_all_warnings!
+
+target 'RNDfpAna' do
+    use_frameworks!
+
+    # pod 'MLAIAna', :path => '~/libPod'
+#    pod 'Ana', :path => '~/Desktop/Ana'
+
+	pod 'Google-Mobile-Ads-SDK', '7.32.0'
+
+   pod 'Ana', :git => 'git@github.com:whisper1/ios-ana.git'
+   pod 'Datametrical', :git => 'git@github.com:whisper1/ios-datametrical.git'
+   pod 'Mixpanel-swift', '<= 2.2.3'
+
+end
